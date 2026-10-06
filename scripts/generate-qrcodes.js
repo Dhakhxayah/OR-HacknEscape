@@ -14,7 +14,7 @@ async function main() {
   const referenceRows = ['slug,type,label,url'];
 
   for (const entry of qrCodes) {
-    const url = `${BASE_URL}/q/${entry.slug}`;
+    const url = `${BASE_URL}/${entry.slug}`;
     const safeLabel = entry.label.replace(/[^a-zA-Z0-9]+/g, '_').replace(/^_+|_+$/g, '');
     const fileName = `${entry.type}-${safeLabel}.png`;
     const filePath = path.join(OUT_DIR, fileName);
