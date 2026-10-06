@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hack n Escape — Admin</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <div class="card wide">
+    <div class="topbar">
+      <h1>Decoy QR Clicks (<%= clicks.length %>)</h1>
+      <form method="POST" action="/admin/logout">
+        <button type="submit" class="secondary">Log out</button>
+      </form>
+    </div>
+
+    <div class="toolbar">
+      <input type="text" id="search" placeholder="Filter by team, name, email, or QR..." onkeyup="filterTable()" />
+      <a href="/admin/export.csv"><button type="button" class="secondary">Export CSV</button></a>
+    </div>
+
+    <table id="clicksTable">
+      <thead>
+        <tr>
+          <th>Team</th>
+          <th>Player</th>
+          <th>Email</th>
+          <th>QR</th>
+          <th>Scanned At</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% clicks.forEach(c => { %>
+          <tr>
+            <td><%= c.team_name %></td>
+            <td><%= c.player_name %></td>
+            <td><%= c.email %></td>
+            <td><%= c.label %> (<%= c.slug %>)</td>
+            <td><%= c.created_at %></td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card wide" style="margin-top: 20px;">
+    <h1>Next-Round Clue</h1>
+    <p class="muted">Shown to players who scan any of the 3 legitimate QR codes. Edit any time, no redeploy needed.</p>
+    <form method="POST" action="/admin/clue">
+      <textarea name="clue"><%= clue %></textarea>
+      <button type="submit">Save Clue</button>
+    </form>
+  </div>
+
+  <script>
+    function filterTable() {
+      const q = document.getElementById('search').value.toLowerCase();
+      document.querySelectorAll('#clicksTable tbody tr').forEach((row) => {
+        row.style.display = row.textContent.toLowerCase().includes(q) ? '' : 'none';
+      });
+    }
+  </script>
+</body>
+</html>

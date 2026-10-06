@@ -1,0 +1,21 @@
+{
+  "name": "qr-hacknescape",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Hack n Escape - QR phishing-awareness round backend",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "generate-qr": "node scripts/generate-qrcodes.js"
+  },
+  "dependencies": {
+    "better-sqlite3": "^11.3.0",
+    "dotenv": "^16.4.5",
+    "ejs": "^3.1.10",
+    "express": "^4.21.0",
+    "express-rate-limit": "^7.4.0",
+    "express-session": "^1.18.0",
+    "qrcode": "^1.5.4"
+  }
+}

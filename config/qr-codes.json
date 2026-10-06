@@ -1,0 +1,15 @@
+[
+  { "slug": "clue-portal-hacknescape-slb.com", "type": "legit", "label": "Legit QR #1" },
+  { "slug": "clue-vault-hacknescape-slb.com", "type": "legit", "label": "Legit QR #2" },
+
+  { "slug": "prize-claim-hacknescape.xyz", "type": "decoy", "label": "Decoy #1", "variant": "prize" },
+  { "slug": "urgent-verify-hacknescape-slb.co", "type": "decoy", "label": "Decoy #2", "variant": "account" },
+  { "slug": "bonus-unlock-hacknescape-slb.info", "type": "decoy", "label": "Decoy #3", "variant": "prize" },
+  { "slug": "account-check-hacknescape-slb.live", "type": "decoy", "label": "Decoy #4", "variant": "account" },
+  { "slug": "reward-now-hacknescape.top", "type": "decoy", "label": "Decoy #5", "variant": "prize" },
+  { "slug": "winner-access-hacknescape-slb.click", "type": "decoy", "label": "Decoy #6", "variant": "prize" },
+  { "slug": "security-alert-hacknescape-slb.site", "type": "decoy", "label": "Decoy #7", "variant": "account" },
+  { "slug": "identity-confirm-hacknescape-slb.online", "type": "decoy", "label": "Decoy #8", "variant": "account" },
+  { "slug": "free-gift-hacknescape.vip", "type": "decoy", "label": "Decoy #9", "variant": "prize" },
+  { "slug": "session-expired-hacknescape-slb.icu", "type": "decoy", "label": "Decoy #10", "variant": "account" }
+]

@@ -1,0 +1,94 @@
+:root {
+  color-scheme: dark;
+  --bg: #0b0f14;
+  --card: #121823;
+  --text: #e6edf3;
+  --muted: #8b98a5;
+  --accent: #2ea043;
+  --danger: #da3633;
+  --warn: #d29922;
+  --border: #2a3542;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+  padding: 24px;
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 32px;
+  max-width: 440px;
+  width: 100%;
+  text-align: center;
+}
+
+.card.wide { max-width: 960px; text-align: left; }
+
+h1 { font-size: 22px; margin-top: 0; }
+
+p.muted, .muted { color: var(--muted); }
+
+.badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+}
+
+.badge.urgent { background: rgba(218,54,51,0.15); color: #ff7b72; }
+.badge.success { background: rgba(46,160,67,0.15); color: #3fb950; }
+
+input, textarea, button {
+  width: 100%;
+  padding: 10px 12px;
+  margin-top: 6px;
+  margin-bottom: 14px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: #0d1117;
+  color: var(--text);
+  font-size: 14px;
+}
+
+textarea { min-height: 120px; font-family: inherit; }
+
+label { font-size: 13px; color: var(--muted); display: block; text-align: left; }
+
+button {
+  cursor: pointer;
+  background: var(--accent);
+  border: none;
+  font-weight: 600;
+  color: #fff;
+}
+
+button.danger { background: var(--danger); }
+button.secondary { background: #30363d; }
+
+.error { color: #ff7b72; font-size: 13px; margin-bottom: 10px; }
+
+table { width: 100%; border-collapse: collapse; font-size: 13px; }
+th, td { padding: 8px 10px; border-bottom: 1px solid var(--border); text-align: left; }
+th { color: var(--muted); font-weight: 600; }
+
+.toolbar { display: flex; gap: 10px; align-items: center; margin-bottom: 16px; flex-wrap: wrap; }
+.toolbar input[type="text"] { width: 240px; margin: 0; }
+.toolbar a, .toolbar button { width: auto; }
+
+.topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+.topbar form { width: auto; margin: 0; }
+.topbar button { margin: 0; padding: 8px 14px; }
