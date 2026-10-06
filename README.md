@@ -13,11 +13,11 @@ subdomain), so the actual hostname never changes. The trick is baked into
 the **URL text itself**, mimicking how real phishing links hide a fake
 "domain" in plain sight:
 
-- Legit: `.../slb-clue-portal.com` — the string literally ends in `.com`,
-  reading like a real, correctly-formed link.
-- Decoy: `.../prize-claim.xyz` — ends in a sketchy TLD (`.xyz`, `.co`,
-  `.info`, `.live`, `.top`, `.click`, `.site`, `.online`, `.vip`, `.icu`)
-  with urgency/prize/"verify now" bait words — exactly like a real
+- Legit: `.../clue-portal-hacknescape-slb.com` — the string literally ends
+  in `.com`, reading like a real, correctly-formed link.
+- Decoy: `.../prize-claim-hacknescape.xyz` — ends in a sketchy TLD (`.xyz`,
+  `.co`, `.info`, `.live`, `.top`, `.click`, `.site`, `.online`, `.vip`,
+  `.icu`) with urgency/prize/"verify now" bait words — exactly like a real
   typosquat link.
 
 **Important limitation:** the real domain (your Render subdomain, e.g.
@@ -44,8 +44,8 @@ copy .env.example .env
 npm run dev
 ```
 
-Visit `http://localhost:3000/slb-clue-portal.com` (legit) or
-`http://localhost:3000/prize-claim.xyz` (decoy) to test.
+Visit `http://localhost:3000/clue-portal-hacknescape-slb.com` (legit) or
+`http://localhost:3000/prize-claim-hacknescape.xyz` (decoy) to test.
 
 ## 2. Edit the QR list
 
