@@ -28,7 +28,7 @@ app.use(
   })
 );
 
-const qrBySlug = new Map(qrCodes.map((q) => [q.slug, q]));
+const qrById = new Map(qrCodes.map((q) => [q.id, q]));
 
 function isSlbEmail(email) {
   return email.trim().toLowerCase().endsWith('@' + ALLOWED_EMAIL_DOMAIN);
@@ -94,20 +94,34 @@ app.get('/admin/export.csv', requireAdmin, (req, res) => {
 
 // ---- Player-facing QR landing pages ----
 // Registered last so they never shadow the literal /admin* routes above.
+//
+// Every physical QR code encodes the same short pattern (/scan/<id>), so a
+// QR scanner's own preview never reveals legit vs decoy. Scanning opens our
+// "preview" page instead, which displays the crafted-looking URL as a
+// clickable link — that's the actual judgment moment, fully under our
+// control instead of depending on how a given phone's scanner truncates
+// long URLs.
 
-app.get('/:slug', (req, res) => {
-  const entry = qrBySlug.get(req.params.slug);
+app.get('/scan/:id', (req, res) => {
+  const entry = qrById.get(req.params.id);
+  if (!entry) return res.status(404).render('notfound');
+
+  return res.render('preview', { id: entry.id, displayUrl: entry.displayUrl });
+});
+
+app.get('/scan/:id/open', (req, res) => {
+  const entry = qrById.get(req.params.id);
   if (!entry) return res.status(404).render('notfound');
 
   if (entry.type === 'legit') {
     return res.render('legit', { clue: getClue() });
   }
 
-  return res.render('decoy', { slug: entry.slug, label: entry.label, variant: entry.variant || 'prize' });
+  return res.render('decoy', { id: entry.id, label: entry.label, variant: entry.variant || 'prize' });
 });
 
-app.post('/:slug/submit', submitLimiter, (req, res) => {
-  const entry = qrBySlug.get(req.params.slug);
+app.post('/scan/:id/submit', submitLimiter, (req, res) => {
+  const entry = qrById.get(req.params.id);
   if (!entry || entry.type !== 'decoy') return res.status(404).render('notfound');
 
   const teamName = (req.body.teamName || '').trim();
@@ -116,7 +130,7 @@ app.post('/:slug/submit', submitLimiter, (req, res) => {
 
   if (!teamName || !playerName || !email) {
     return res.status(400).render('decoy', {
-      slug: entry.slug,
+      id: entry.id,
       label: entry.label,
       variant: entry.variant || 'prize',
       error: 'Please fill in all fields.',
@@ -128,7 +142,7 @@ app.post('/:slug/submit', submitLimiter, (req, res) => {
 
   if (!isSlbEmail(email)) {
     return res.status(400).render('decoy', {
-      slug: entry.slug,
+      id: entry.id,
       label: entry.label,
       variant: entry.variant || 'prize',
       error: `Please use your @${ALLOWED_EMAIL_DOMAIN} email address.`,
@@ -139,7 +153,7 @@ app.post('/:slug/submit', submitLimiter, (req, res) => {
   }
 
   recordClick({
-    slug: entry.slug,
+    slug: entry.id,
     label: entry.label,
     teamName,
     playerName,

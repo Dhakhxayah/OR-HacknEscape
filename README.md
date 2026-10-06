@@ -8,33 +8,30 @@ flagged out of the round. Scanning a legitimate QR shows the next-round clue.
 
 ## How the "spot the phishing" mechanic works here
 
-All 12 QR codes are hosted on the same real domain (the free Render
-subdomain), so the actual hostname never changes. The trick is baked into
-the **URL text itself**, mimicking how real phishing links hide a fake
-"domain" in plain sight:
+Every printed QR code encodes the exact same short pattern:
+`https://<your-render-url>/scan/<id>` — a random unguessable 7-character id,
+nothing else. A QR scanner's own built-in preview is unreliable (some apps
+truncate long URLs, some show nothing meaningful, behavior varies by phone),
+so instead of relying on it, scanning takes the player to **our own preview
+page**. That page displays the crafted, phishing-style URL as a clickable
+link — e.g. `https://clue-portal-hacknescape-slb.com` for a legit code, or
+`https://prize-claim-hacknescape.xyz` for a decoy — and that's the actual
+judgment moment. Tapping the link opens the real clue or decoy-capture page.
 
-- Legit: `.../clue-portal-hacknescape-slb.com` — the string literally ends
-  in `.com`, reading like a real, correctly-formed link.
-- Decoy: `.../prize-claim-hacknescape.xyz` — ends in a sketchy TLD (`.xyz`,
-  `.co`, `.info`, `.live`, `.top`, `.click`, `.site`, `.online`, `.vip`,
-  `.icu`) with urgency/prize/"verify now" bait words — exactly like a real
-  typosquat link.
+This sidesteps every domain/hosting limitation entirely: the displayed text
+is just a string we control, so it can end in a real `.com` or a sketchy
+`.xyz`/`.co`/`.info`/etc. exactly as written, with no length limit, no
+character restrictions, and no dependency on what's actually hosting the
+site. Edit the `displayUrl` field per entry in `config/qr-codes.json` to
+change what's shown.
 
-**Important limitation:** the real domain (your Render subdomain, e.g.
-`or-hacknescape.onrender.com`) always appears *first* in the actual URL —
-nothing can move the crafted text in front of it, that's just how URLs
-work. Slugs are kept short deliberately so that a QR scanner's truncated
-preview still shows enough of the crafted ending before cutting off. Do a
-real test scan after deploying to confirm your phone's scanner shows
-enough of the URL — if it's still getting cut off, shortening your Render
-service name itself (in the Render dashboard) frees up more visible room.
-
-The debrief point: the fake `.xyz`/`.co` text is just part of the path, not
-a real domain — the *actual* domain (the part after `https://` and before
-the first `/`) is identical on every single QR code. Players who only
-eyeball the flashy part of the link and never check the real domain are
-exactly who falls for real phishing. Edit `config/qr-codes.json` to tune
-wording or add more TLD/bait variations.
+The debrief point: the *real* URL (what's in the QR code and the browser's
+address bar) is identical and boring for every single code —
+`/scan/<random-id>`. The flashy `.com`/`.xyz`-looking text only ever
+appears as page content we wrote, never as an actual domain. That mirrors
+how real phishing often works: the boring real domain is the part people
+skip past, while a trustworthy-looking brand name elsewhere is what
+actually gets read.
 
 ## 1. Local setup
 
@@ -44,14 +41,21 @@ copy .env.example .env
 npm run dev
 ```
 
-Visit `http://localhost:3000/clue-portal-hacknescape-slb.com` (legit) or
-`http://localhost:3000/prize-claim-hacknescape.xyz` (decoy) to test.
+Visit `http://localhost:3000/scan/zpkrdeg` (legit) or
+`http://localhost:3000/scan/y9hjnr8` (decoy) to test — each opens the
+preview page first, then click the displayed link to continue through.
 
 ## 2. Edit the QR list
 
 `config/qr-codes.json` has 12 entries — 2 `"type": "legit"`, 10
-`"type": "decoy"`. Change slugs/labels/wording freely; the `variant` field on
-decoys (`prize` or `account`) picks which bait copy is shown.
+`"type": "decoy"`. Each entry has:
+- `id` — the random string used in the actual QR/URL (`/scan/<id>`). Keep
+  these unguessable — don't make them sequential, or players could just
+  guess other ids in the address bar without scanning anything.
+- `displayUrl` — the fake "link preview" text shown to players, free-form,
+  can look like any domain/TLD you want.
+- `label` / `type` / `variant` (`prize` or `account`, decoys only, picks
+  which bait copy is shown on the capture form).
 
 ## 3. Deploy to Render (free)
 
@@ -84,8 +88,9 @@ npm run generate-qr
 This writes PNGs to `qr-output/` named like `legit-Legit_QR_1.png` and
 `decoy-Decoy_3.png` — those filenames are for your own organizing only
 (never shown to players). Print and scatter the **PNG files**. A
-`_reference_DO_NOT_PRINT.csv` is also written there mapping every slug to
-legit/decoy — keep that file private, don't print or post it.
+`_reference_DO_NOT_PRINT.csv` is also written there mapping every id to
+legit/decoy — keep that file private, don't print, post, or commit it (it's
+gitignored already, same as the whole `qr-output/` folder).
 
 ## 5. Admin dashboard
 

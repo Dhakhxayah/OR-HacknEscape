@@ -11,18 +11,18 @@ const OUT_DIR = path.join(__dirname, '..', 'qr-output');
 async function main() {
   fs.mkdirSync(OUT_DIR, { recursive: true });
 
-  const referenceRows = ['slug,type,label,url'];
+  const referenceRows = ['id,type,label,displayUrl,realUrl'];
 
   for (const entry of qrCodes) {
-    const url = `${BASE_URL}/${entry.slug}`;
+    const url = `${BASE_URL}/scan/${entry.id}`;
     const safeLabel = entry.label.replace(/[^a-zA-Z0-9]+/g, '_').replace(/^_+|_+$/g, '');
     const fileName = `${entry.type}-${safeLabel}.png`;
     const filePath = path.join(OUT_DIR, fileName);
 
     await QRCode.toFile(filePath, url, { width: 600, margin: 2 });
-    console.log(`Generated ${fileName} -> ${url}`);
+    console.log(`Generated ${fileName} -> ${url} (shows as ${entry.displayUrl})`);
 
-    referenceRows.push(`${entry.slug},${entry.type},${entry.label},${url}`);
+    referenceRows.push(`${entry.id},${entry.type},${entry.label},${entry.displayUrl},${url}`);
   }
 
   const referencePath = path.join(OUT_DIR, '_reference_DO_NOT_PRINT.csv');

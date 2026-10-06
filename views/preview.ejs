@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Link Preview</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <div class="card">
+    <h1>You scanned a QR code</h1>
+    <p class="muted">It links to:</p>
+    <p style="word-break: break-all; margin: 18px 0;">
+      <a href="/scan/<%= id %>/open" style="color: #58a6ff; font-size: 17px; text-decoration: underline;">
+        <%= displayUrl %>
+      </a>
+    </p>
+    <p class="muted" style="font-size: 12px;">Decide if this looks legitimate before tapping it.</p>
+  </div>
+</body>
+</html>

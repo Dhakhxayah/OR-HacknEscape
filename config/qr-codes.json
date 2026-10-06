@@ -1,15 +1,15 @@
 [
-  { "slug": "clue-portal-hacknescape-slb.com", "type": "legit", "label": "Legit QR #1" },
-  { "slug": "clue-vault-hacknescape-slb.com", "type": "legit", "label": "Legit QR #2" },
+  { "id": "zpkrdeg", "displayUrl": "https://clue-portal-hacknescape-slb.com", "type": "legit", "label": "Legit QR #1" },
+  { "id": "wv5h5e9", "displayUrl": "https://clue-vault-hacknescape-slb.com", "type": "legit", "label": "Legit QR #2" },
 
-  { "slug": "prize-claim-hacknescape.xyz", "type": "decoy", "label": "Decoy #1", "variant": "prize" },
-  { "slug": "urgent-verify-hacknescape-slb.co", "type": "decoy", "label": "Decoy #2", "variant": "account" },
-  { "slug": "bonus-unlock-hacknescape-slb.info", "type": "decoy", "label": "Decoy #3", "variant": "prize" },
-  { "slug": "account-check-hacknescape-slb.live", "type": "decoy", "label": "Decoy #4", "variant": "account" },
-  { "slug": "reward-now-hacknescape.top", "type": "decoy", "label": "Decoy #5", "variant": "prize" },
-  { "slug": "winner-access-hacknescape-slb.click", "type": "decoy", "label": "Decoy #6", "variant": "prize" },
-  { "slug": "security-alert-hacknescape-slb.site", "type": "decoy", "label": "Decoy #7", "variant": "account" },
-  { "slug": "identity-confirm-hacknescape-slb.online", "type": "decoy", "label": "Decoy #8", "variant": "account" },
-  { "slug": "free-gift-hacknescape.vip", "type": "decoy", "label": "Decoy #9", "variant": "prize" },
-  { "slug": "session-expired-hacknescape-slb.icu", "type": "decoy", "label": "Decoy #10", "variant": "account" }
+  { "id": "y9hjnr8", "displayUrl": "https://prize-claim-hacknescape.xyz", "type": "decoy", "label": "Decoy #1", "variant": "prize" },
+  { "id": "ynyfmgu", "displayUrl": "https://urgent-verify-hacknescape-slb.co", "type": "decoy", "label": "Decoy #2", "variant": "account" },
+  { "id": "fgdhfx3", "displayUrl": "https://bonus-unlock-hacknescape-slb.info", "type": "decoy", "label": "Decoy #3", "variant": "prize" },
+  { "id": "xjsrxtn", "displayUrl": "https://account-check-hacknescape-slb.live", "type": "decoy", "label": "Decoy #4", "variant": "account" },
+  { "id": "2y3cttw", "displayUrl": "https://reward-now-hacknescape.top", "type": "decoy", "label": "Decoy #5", "variant": "prize" },
+  { "id": "nc9pgdu", "displayUrl": "https://winner-access-hacknescape-slb.click", "type": "decoy", "label": "Decoy #6", "variant": "prize" },
+  { "id": "mvubff2", "displayUrl": "https://security-alert-hacknescape-slb.site", "type": "decoy", "label": "Decoy #7", "variant": "account" },
+  { "id": "r75z3qj", "displayUrl": "https://identity-confirm-hacknescape-slb.online", "type": "decoy", "label": "Decoy #8", "variant": "account" },
+  { "id": "wwnzfq2", "displayUrl": "https://free-gift-hacknescape.vip", "type": "decoy", "label": "Decoy #9", "variant": "prize" },
+  { "id": "8ybkd76", "displayUrl": "https://session-expired-hacknescape-slb.icu", "type": "decoy", "label": "Decoy #10", "variant": "account" }
 ]
